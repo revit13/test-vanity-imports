@@ -3,14 +3,6 @@
     "repositories": [
       {
         "prefix": "vanity",
-        "subs": [
-           "cmd/simple-service",
-           "pkg/serde",
-           "pkg/taxonomy/",
-           "pkg/taxonomy/compile",
-           "pkg/taxonomy/io",
-           "pkg/taxonomy/model"
-        ],
         "url": "https://github.com/revit13/test-vanity-imports"
       }
    ]
