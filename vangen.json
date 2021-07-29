@@ -1,0 +1,10 @@
+{
+    "domain": "xyz.fybrik.io",
+    "repositories": [
+      {
+        "prefix": "vanity",
+        "url": "https://github.com/revit13/test-vanity-imports"
+      }
+   ]
+}
+
