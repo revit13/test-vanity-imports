@@ -1,4 +1,4 @@
-name: Build
+name: Trigger Vanity imports generation 
 
 on:
   repository_dispatch:
