@@ -1,5 +1,7 @@
 name: Release
-on: create
+on: 
+  dispatch_workflow:
+
 jobs:
   update-release-branch:
     runs-on: ubuntu-latest

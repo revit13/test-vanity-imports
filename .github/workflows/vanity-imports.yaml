@@ -1,11 +1,7 @@
 name: Trigger Vanity imports generation 
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - '*'
+  dispatch_workflow:
 
 jobs:
  RepoAjobs:
