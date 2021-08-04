@@ -1,6 +1,6 @@
 name: Release
 on: 
-  dispatch_workflow:
+  workflow_dispatch:
 
 jobs:
   update-release-branch:
