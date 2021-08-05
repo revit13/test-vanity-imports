@@ -1,0 +1,48 @@
+name: Tag images
+
+
+
+on:
+   workload_dispatch:
+   
+
+env:
+  GO_VERSION: 1.16
+  JAVA_VERSION: 11
+
+jobs:
+  push_images:
+    name: Push images
+    runs-on: ubuntu-latest
+    env:
+    if: ${{ github.event_name != 'pull_request' }}
+    steps:
+    - id: version
+      name: Infer version
+      run: |
+        version="${GITHUB_REF#refs/tags/v}"
+        echo $version
+        is_tag=true
+        if  [[ $version == refs/* ]] ;
+        then
+            is_tag=false
+            branch="${GITHUB_REF#refs/heads/})"
+            version=$branch
+            
+        fi
+        echo $version
+        echo ::set-output name=version::$version
+        echo ::set-output is_tag=version::$is_tag
+    - name: Publish images
+      if: ${{ github.event_name != 'pull_request' }}
+      env:
+        DOCKER_PUBLIC_TAGNAME:  ${{ steps.version.outputs.version }}
+      run: echo $DOCKER_PUBLIC_TAGNAME
+    - name: Publish latest image tag for release
+      if: |
+        ${{ github.event_name != 'pull_request' &&
+        steps.version.outputs.is_tag }}
+      env:
+        DOCKER_PUBLIC_TAGNAME:  latest
+      run: echo $DOCKER_PUBLIC_TAGNAME
+
