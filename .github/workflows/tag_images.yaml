@@ -9,6 +9,7 @@ on:
 env:
   GO_VERSION: 1.16
   JAVA_VERSION: 11
+  TAG_EVENT: ${{ true }}
 
 jobs:
   push_images:
@@ -24,14 +25,12 @@ jobs:
         is_tag = 'false'
         if  [[ $version == refs/* ]] ;
         then
-            $is_tag = 'false'
+            echo "TAG_EVENT=${{ false }}" >> $GITHUB_ENV
             branch="${GITHUB_REF#refs/heads/})"
             version=$branch
             
         fi
         echo $version
-        echo ::set-output name=version::$version
-        echo ::set-output name=is_tag::$is_tag
     - name: Publish images
       if: ${{ github.event_name != 'pull_request' }}
       env:
@@ -40,7 +39,7 @@ jobs:
     - name: Publish latest image tag for release
       if: |
         github.event_name != 'pull_request' &&
-        steps.version.outputs.is_tag == 'true'
+        env.TAG_EVENT == true
       env:
         DOCKER_PUBLIC_TAGNAME:  latest
       run: echo $DOCKER_PUBLIC_TAGNAME
