@@ -2,9 +2,16 @@ name: Tag images
 
 
 
-on:
-   workflow_dispatch:
-   
+  on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - master
+ 
 
 env:
   GO_VERSION: 1.16
@@ -33,7 +40,7 @@ jobs:
         echo ${TAG_EVENT}
         echo ::set-output name=version::$version
     - name: Publish images
-      if: ${{ github.event_name != 'pull_request' }}
+      if: github.event_name != 'pull_request' && !startsWith (steps.version.outputs.version,'releases') && steps.version.outputs.version !=site
       env:
         DOCKER_PUBLIC_TAGNAME:  ${{ steps.version.outputs.version }}
       run: |
