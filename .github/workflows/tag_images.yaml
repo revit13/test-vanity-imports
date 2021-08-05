@@ -3,7 +3,7 @@ name: Tag images
 
 
 on:
-   workload_dispatch:
+   workflow_dispatch:
    
 
 env:
