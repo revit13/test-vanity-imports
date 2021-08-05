@@ -43,6 +43,7 @@ jobs:
       run: |
         echo ${DOCKER_PUBLIC_TAGNAME}
         echo ${TAG_EVENT}
+        echo "here!!"
     - name: Publish latest image tag for release
       if: github.event_name != 'pull_request' && env.TAG_EVENT == 'true'
       env:
