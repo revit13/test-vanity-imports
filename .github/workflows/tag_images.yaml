@@ -21,7 +21,7 @@ jobs:
       run: |
         version="${GITHUB_REF#refs/tags/v}"
         echo $version
-        is_tag = ${{ false }}
+        is_tag = 'false'
         if  [[ $version == refs/* ]] ;
         then
             $is_tag = 'false'
