@@ -21,7 +21,7 @@ jobs:
       run: |
         version="${GITHUB_REF#refs/tags/v}"
         echo $version
-        is_tag = 'true'
+        is_tag = ${{ false }}
         if  [[ $version == refs/* ]] ;
         then
             $is_tag = 'false'
@@ -40,7 +40,7 @@ jobs:
     - name: Publish latest image tag for release
       if: |
         github.event_name != 'pull_request' &&
-        steps.version.outputs.is_tag -eq 'true'
+        steps.version.outputs.is_tag == 'true'
       env:
         DOCKER_PUBLIC_TAGNAME:  latest
       run: echo $DOCKER_PUBLIC_TAGNAME
