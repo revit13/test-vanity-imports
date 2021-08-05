@@ -37,7 +37,7 @@ jobs:
         echo ${TAG_EVENT}
         echo ::set-output name=version::$version
     - name: Publish images
-      if: github.event_name != 'pull_request' && !startsWith (steps.version.outputs.version,'releases') && steps.version.outputs.version !=site
+      if: github.event_name != 'pull_request' && !startsWith (steps.version.outputs.version,'releases') && steps.version.outputs.version != 'site'
       env:
         DOCKER_PUBLIC_TAGNAME:  ${{ steps.version.outputs.version }}
       run: |
