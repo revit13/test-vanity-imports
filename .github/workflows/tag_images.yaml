@@ -30,6 +30,7 @@ jobs:
             
         fi
         echo $version
+        echo ${TAG_EVENT}
     - name: Publish images
       if: ${{ github.event_name != 'pull_request' }}
       env:
@@ -40,6 +41,9 @@ jobs:
         github.event_name != 'pull_request' &&
         env.TAG_EVENT == true
       env:
-        DOCKER_PUBLIC_TAGNAME:  latest
-      run: echo $DOCKER_PUBLIC_TAGNAME
+        DOCKER_PUBLIC_TAGNAME: latest
+      run: |
+        echo ${DOCKER_PUBLIC_TAGNAME}
+        echo ${TAG_EVENT}
+        echo "revit!!!"
 
