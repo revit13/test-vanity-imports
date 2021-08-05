@@ -2,8 +2,9 @@ name: Tag images
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'releases/**'
+      - 'site'
     tags:
       - '*'
 
