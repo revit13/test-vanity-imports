@@ -22,7 +22,6 @@ jobs:
       run: |
         version="${GITHUB_REF#refs/tags/v}"
         echo $version
-        is_tag = 'false'
         if  [[ $version == refs/* ]] ;
         then
             echo "TAG_EVENT=${{ false }}" >> $GITHUB_ENV
