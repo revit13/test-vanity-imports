@@ -1,14 +1,16 @@
 name: Tag images
 
+#on:
+ # push:
+  #  branches:
+   #   - '*'
+   # tags:
+   #   - '*'
+ # pull_request:
+  #  branches:
+   #   - main
 on:
-  push:
-    branches:
-      - '*' 
-    tags:
-      - '*'
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   GO_VERSION: 1.16
