@@ -14,7 +14,6 @@ jobs:
   push_images:
     name: Push images
     runs-on: ubuntu-latest
-    env:
     if: ${{ github.event_name != 'pull_request' }}
     steps:
     - id: version
