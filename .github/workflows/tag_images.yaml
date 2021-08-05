@@ -24,8 +24,8 @@ jobs:
         echo $version
         if  [[ $version == refs/* ]] ;
         then
-            echo "TAG_EVENT=${{ false }}" >> $GITHUB_ENV
-            branch="${GITHUB_REF#refs/heads/})"
+            echo "TAG_EVENT=false" >> $GITHUB_ENV
+            branch="${GITHUB_REF#refs/heads/}"
             version=$branch
             
         fi
