@@ -24,27 +24,31 @@ jobs:
       run: |
         version="${GITHUB_REF#refs/tags/v}"
         echo $version
+        push_event='true'
         if  [[ $version == refs/* ]] ;
         then
             echo 'TAG_EVENT=false' >> $GITHUB_ENV
             branch="${GITHUB_REF#refs/heads/}"
             version=$branch
+            push_event='false'
             
         fi
         echo $version
         echo ::set-output name=version::$version
+        echo ::set-output name=push_event::$push_event
     - name: Publish images
-      if: github.event_name != 'pull_request' && !startsWith (steps.version.outputs.version,'releases') && steps.version.outputs.version != 'site'
+      if: github.event_name != 'pull_request'
       env:
         DOCKER_PUBLIC_TAGNAME:  ${{ steps.version.outputs.version }}
       run: |
         echo ${DOCKER_PUBLIC_TAGNAME}
         echo ${TAG_EVENT}
+        echo  ${{ steps.version.outputs.push_event }}
         echo "here!!"
     - name: Publish latest image tag for release
       if: github.event_name != 'pull_request' && env.TAG_EVENT == 'true'
       env:
-        DOCKER_PUBLIC_TAGNAME: latest
+        DOCKER_PUBLIC_TAGNAME: 'latest'
       run: |
         echo ${DOCKER_PUBLIC_TAGNAME}
         echo ${TAG_EVENT}
