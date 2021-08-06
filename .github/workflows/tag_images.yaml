@@ -46,7 +46,7 @@ jobs:
         echo  ${{ steps.version.outputs.push_event }}
         echo "here!!"
     - name: Publish latest image tag for release
-      if: github.event_name != 'pull_request' && env.TAG_EVENT == 'true'
+      if: github.event_name != 'pull_request' && steps.version.outputs.push_event == 'true'
       env:
         DOCKER_PUBLIC_TAGNAME: 'latest'
       run: |
