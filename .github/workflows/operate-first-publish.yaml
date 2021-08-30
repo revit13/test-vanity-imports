@@ -1,0 +1,33 @@
+name: Update Operate First directory
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Update Operate First directory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Operate First repository
+        uses: actions/checkout@v2
+        with:
+          repository: operate-first/apps
+          path: operate-first
+          ref: https://github.com/operate-first/apps
+      - name: Checkout Fybrik repository
+        uses: actions/checkout@v2
+        with:
+          repository: revit13/the-mesh-for-data
+          path: fybrik-repo
+          ref: https://github.com/revit13/the-mesh-for-data
+      - run: |
+          rm -r fybrik-repo/samples/operate-first/*/
+          rm fybrik-repo/samples/operate-first/*.yaml
+          cd fybrik-repo/hack/tools
+          ./install_yq.sh
+          ./install_helm.sh
+          cd fybrik-repo/samples/operate-first
+          pipenv install
+          pipenv shell
+          make all
+   
