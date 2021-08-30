@@ -13,7 +13,6 @@ jobs:
         with:
           repository: operate-first/apps
           path: operate-first
-          ref: https://github.com/operate-first/apps
       - name: Checkout Fybrik repository
         uses: actions/checkout@v2
         with:
