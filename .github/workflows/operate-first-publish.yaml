@@ -18,7 +18,6 @@ jobs:
         with:
           repository: revit13/the-mesh-for-data
           path: fybrik-repo
-          ref: https://github.com/revit13/the-mesh-for-data
       - run: |
           rm -r fybrik-repo/samples/operate-first/*/
           rm fybrik-repo/samples/operate-first/*.yaml
